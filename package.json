@@ -1,6 +1,6 @@
 {
   "name": "ion-back-button-tabs",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "MIT",
   "description": "Advanced ion-back-button component.",
   "author": "Marcel Mayer",
@@ -20,10 +20,18 @@
   "keywords": [
     "ionic 4",
     "ion-back-button",
+    "ion-back-button-tabs",
     "ion-tabs",
     "navigation",
     "StackController",
-    "IonRouterOutlet"
+    "IonRouterOutlet",
+    "ionic",
+    "ionicframework",
+    "ionic framework",
+    "angular",
+    "router",
+    "lazy-loading",
+    "ionic4"
   ],
   "peerDependencies": {
     "@angular/common": "^7.2.0",
