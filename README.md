@@ -89,7 +89,7 @@ If this is the case, the last active *tab-route* is determined with the help of 
 <br />
 For the determination, the [*StackController*](https://github.com/ionic-team/ionic/blob/v4.0.2/angular/src/directives/navigation/stack-controller.ts) of the [`ion-tabs`](https://ionicframework.com/docs/api/tabs) component view, which is located in the component view of the specified [*tabsPageSelector*](#tabspageselector-is-the-selector-of-the-tabspage-component-eg-app-tabs), is taken.<br />
 <br />
-💩 Nevertheless, this is not a complete clean solution because currently  the [*location*](https://github.com/ionic-team/ionic/blob/v4.0.2/angular/src/directives/navigation/ion-router-outlet.ts#L48) attribute of the current *IonRouterOutlet* is used to get the current *ViewContainerRef*, which is needed to find the component views.<br />
+Nevertheless, this is not a complete clean solution because currently private attributes of the current *IonRouterOutlet* are used. The [*location*](https://github.com/ionic-team/ionic/blob/v4.0.2/angular/src/directives/navigation/ion-router-outlet.ts#L48) attribute to get the current *ViewContainerRef*, which is needed to find the component views. And some more to support swipe gestures. <br />
 <br />
 
 

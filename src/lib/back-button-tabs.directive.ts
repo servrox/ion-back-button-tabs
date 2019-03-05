@@ -10,10 +10,26 @@ export class BackButtonTabsDirective {
     @Input() tabsPrefix: string | undefined | null;
     @Input() tabsPageSelector: string | undefined | null;
 
-    constructor(@Optional() private routerOutlet: IonRouterOutlet, private navCtrl: NavController) { }
+    constructor(@Optional() private routerOutlet: IonRouterOutlet, private navCtrl: NavController) {
+        this.fixSwipe();
+    }
+
+    private fixSwipe() {
+        const swipe = this.routerOutlet._swipeGesture;
+        this.routerOutlet.nativeEl.swipeHandler = swipe ? {
+            canStart: () => this.routerOutlet.canGoBack(1),
+            onStart: () => { this.routerOutlet.stackCtrl.startBackTransition(); },
+            onEnd: shouldContinue => { if (shouldContinue) { this.goBack(false); } }
+        } : undefined;
+    }
 
     @HostListener('click', ['$event'])
-    onClick(ev: Event) {
+    onClick(ev?: Event) {
+        this.goBack();
+        ev.preventDefault();
+    }
+
+    private goBack(animated = true) {
         let lastTabUrl: string;
 
         if (this.routerOutlet) {
@@ -21,16 +37,10 @@ export class BackButtonTabsDirective {
             if (this.backToTabs(nonCrclrRtrOtlt)) { lastTabUrl = this.getActiveTabViewUrl(); }
         }
 
-        if (this.routerOutlet && this.routerOutlet.canGoBack() && lastTabUrl) {
-            this.navCtrl.navigateBack(lastTabUrl);
-            ev.preventDefault();
-        } else if (this.routerOutlet && this.routerOutlet.canGoBack()) {
-            this.routerOutlet.pop();
-            ev.preventDefault();
-        } else if (this.defaultHref != null) {
-            this.navCtrl.navigateBack(this.defaultHref);
-            ev.preventDefault();
-        }
+        if (this.routerOutlet && this.routerOutlet.canGoBack()
+            && lastTabUrl) { this.navCtrl.navigateBack(lastTabUrl, { animated: animated }); } else
+            if (this.routerOutlet && this.routerOutlet.canGoBack()) { this.navCtrl.back({ animated: animated }); } else
+                if (this.defaultHref != null) { this.navCtrl.navigateBack(this.defaultHref, { animated: animated }); }
     }
 
     private backToTabs(nonCrclrRtrOtlt): boolean {
