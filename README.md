@@ -60,11 +60,20 @@ export class TabsPage {}
 ```
 ### 4. Use `ion-back-button-tabs` in template
 ```
-<ion-back-button-tabs 
-  defaultHref="/tabs/tab1" 
-  tabsPrefix="tabs" 
-  tabsPageSelector="app-tabs">
-</ion-back-button-tabs>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+
+      <ion-back-button-tabs 
+        defaultHref="/tabs/tab1" 
+        tabsPrefix="tabs" 
+        tabsPageSelector="app-tabs">
+      </ion-back-button-tabs>
+      
+    </ion-buttons>
+    <ion-title>Global Page</ion-title>
+  </ion-toolbar>
+</ion-header>
 ```
 <br />
 

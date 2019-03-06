@@ -64,7 +64,7 @@ export class BackButtonTabsDirective {
                             && views[i].nodes[j].componentView.nodes[k].renderElement.localName === 'ion-tabs') {
                             const activeTab = views[i].nodes[j].componentView.nodes[k]
                                 .componentView.context.outlet.stackCtrl.getActiveStackId();
-                            return views[i].nodes[j].componentView.nodes[0]
+                            return views[i].nodes[j].componentView.nodes[k]
                                 .componentView.context.outlet.stackCtrl.getLastUrl(activeTab).url;
                         }
                     }
